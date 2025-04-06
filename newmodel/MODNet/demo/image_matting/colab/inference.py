@@ -111,7 +111,7 @@ def main():
     parser.add_argument('--input-path', type=str, required=True, help='전경(인물) 이미지 경로')
     parser.add_argument('--background-path', type=str, required=True, help='배경 이미지 경로')
     parser.add_argument('--ckpt-path', type=str, required=True, help='ONNX 모델 경로 (modnet.onnx)')
-    parser.add_argument('--output-path', type=str, required=True, help='최종 합성 결과 경로')
+    ##parser.add_argument('--output-path', type=str, required=True, help='최종 합성 결과 경로')
     args = parser.parse_args()
 
     # 1) 전경 이미지 로딩 + EXIF 자동 회전
@@ -140,8 +140,13 @@ def main():
     comp_image = alpha_composite(fg_image, matte_np, bg_image)
 
     # 7) 저장
-    comp_image.save(args.output_path)
-    print(f"[Done] saved to {args.output_path}")
+    os.makedirs("output", exist_ok=True)
+    input_filename = os.path.basename(args.input_path)
+    output_filename = os.path.splitext(input_filename)[0] + "_replaced.png"
+    output_full_path = os.path.join("output", output_filename)
+
+    comp_image.save(output_full_path)
+    print(f"[Done] saved to {output_full_path}")
 
 
 if __name__ == '__main__':
