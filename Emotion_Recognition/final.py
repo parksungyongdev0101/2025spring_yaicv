@@ -20,7 +20,7 @@ model.load_state_dict(torch.load('emotion_swin_last.pth', map_location=device))
 model.eval()
 
 # 이미지 경로 (48x48 grayscale 이미지)
-image_path = 'face_gray_48x48.jpg'
+image_path = '224x224.jpg'
 
 # 🔄 전처리: 1채널 → 3채널 복제 → Resize → Tensor → Normalize
 transform = transforms.Compose([
