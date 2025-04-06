@@ -1,0 +1,1 @@
+python -m demo.image_matting.colab.inference --input-path ronaldo.jpg --background-path cosmic.jpg --ckpt-path pretrained/modnet.onnx --output-path replaced.png
